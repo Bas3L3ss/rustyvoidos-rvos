@@ -1,1 +1,0 @@
-qemu-system-x86_64 -drive format=raw,file=/home/phamthienhung/Desktop/software-life/projects/hardcore-projects/rustyvoidos-rvos/target/x86_64-rvos/debug/bootimage-rustyvoidos-rvos.bin
