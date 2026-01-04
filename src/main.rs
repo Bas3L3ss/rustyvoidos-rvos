@@ -4,11 +4,11 @@
 #![test_runner(rustyvoidos_rvos::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
+use bootloader::{BootInfo, entry_point};
 use core::panic::PanicInfo;
-use rustyvoidos_rvos::println;
 
-#[unsafe(no_mangle)]
-pub extern "C" fn _start() -> ! {
+entry_point!(kernel_main);
+fn kernel_main(boot_info: &'static BootInfo) -> ! {
     rustyvoidos_rvos::init();
 
     #[cfg(test)]
@@ -27,6 +27,8 @@ fn panic(info: &PanicInfo) -> ! {
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
+    use rustyvoidos_rvos::println;
+
     println!("{}", info);
     rustyvoidos_rvos::hlt_loop();
 }
